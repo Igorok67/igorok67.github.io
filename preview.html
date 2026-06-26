@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+       <title>Моя Визитка</title>
+
+    <!-- Подключение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           ОСНОВНЫЕ СТИЛИ
+        ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background:
+                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.7)),
+                url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Контейнер */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* ============================================
+           ШАПКА САЙТА
+        ============================================ */
+
+        header {
+            padding: 25px 0;
+            backdrop-filter: blur(8px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #00ffd5;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        /* Эффект подчеркивания при наведении */
+        .menu a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0%;
+            height: 2px;
+            background: #00ffd5;
+            transition: 0.3s;
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        .menu a:hover {
+            color: #00ffd5;
+        }
+
+        /* ============================================
+           ГЛАВНЫЙ БЛОК
+        ============================================ */
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            background: rgba(255,255,255,0.08);
+            padding: 50px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 25px rgba(0,255,213,0.2);
+            animation: fadeIn 1.5s ease;
+        }
+
+        .hero img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #00ffd5;
+            margin-bottom: 25px;
+            transition: 0.4s;
+        }
+
+        /* Эффект увеличения фото */
+        .hero img:hover {
+            transform: scale(1.08) rotate(2deg);
+        }
+
+        h1 {
+            font-size: 52px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: #d9d9d9;
+            margin-bottom: 25px;
+        }
+
+        .description {
+            line-height: 1.8;
+            margin-bottom: 35px;
+            color: #f0f0f0;
+        }
+
+        /* ============================================
+           КНОПКИ
+        ============================================ */
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 50px;
+            border: none;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00ffd5, #00b3ff);
+            color: black;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,255,213,0.3);
+        }
+
+        /* ============================================
+           БЛОК НАВЫКОВ
+        ============================================ */
+
+        .skills {
+            margin-top: 50px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .skill {
+            padding: 12px 18px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            background: #00ffd5;
+            color: black;
+            transform: scale(1.05);
+        }
+
+        /* ============================================
+           POPUP ОКНО
+        ============================================ */
+
+        .popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .popup-content {
+            background: #111;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: popupShow 0.4s ease;
+        }
+
+        .popup-content h2 {
+            margin-bottom: 20px;
+            color: #00ffd5;
+        }
+
+        .popup-content p {
+            line-height: 1.7;
+            color: #ddd;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ============================================
+           ФУТЕР
+        ============================================ */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ============================================
+           АНИМАЦИИ
+        ============================================ */
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popupShow {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ============================================
+           АДАПТИВНОСТЬ
+        ============================================ */
+
+        @media(max-width: 768px) {
+
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .hero-content {
+                padding: 30px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         ШАПКА
+    ============================================ -->
+
+    <header>
+        <div class="container">
+            <nav>
+
+                <!-- ЛОГО -->
+                <div class="logo">САЙТ - ВИЗИТКА</div>
+
+                <!-- МЕНЮ -->
+                <div class="menu">
+                    <a href="#">Главная</a>
+                    <a href="#skills">Навыки</a>
+
+                    <!-- 
+                        ЭТА ССЫЛКА ОТКРЫВАЕТ POPUP
+                    -->
+                    <a href="#" onclick="openPopup()">Обо мне</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         ГЛАВНЫЙ БЛОК
+    ============================================ -->
+
+    <section class="hero">
+        <div class="hero-content">
+
+            
+            <img src="001.jpg?q=80&w=500&auto=format&fit=crop"
+                 alt="Мое фото">
+
+            <!-- ИМЯ -->
+            <h1>Игорь</h1>
+
+            <!-- ПРОФЕССИЯ -->
+            <p class="subtitle">QA Engeneer</p>
+
+            <!-- ОПИСАНИЕ -->
+            <p class="description">
+                Привет 👋 <br><br>
+
+                Этот современный и классный сайт-визитка мой. Написан он на HTML включает в себя CSS и JavaScript.
+                Здесь используются:
+                красивые анимации, popup окно, адаптивный дизайн,
+                фоновые изображения и стильные кнопки.
+                <br><br>
+                Я буду рад делиться тут информацией о себе.
+            </p>
+
+            <!-- КНОПКИ -->
+            <div class="buttons">
+
+                <!-- 
+                    Обычная ссылка
+                -->
+                <a class="btn btn-primary"
+                   href="https://github.com/"
+                   target="_blank">
+                    Мой GitHub
+                </a>
+
+                <!-- 
+                    Кнопка открытия popup окна
+                -->
+                <button class="btn btn-secondary"
+                        onclick="openPopup()">
+                    Подробнее
+                </button>
+            </div>
+
+            <!-- НАВЫКИ -->
+            <div class="skills" id="skills">
+                <div class="skill">Postman</div>
+                <div class="skill">JIRA</div>
+                <div class="skill">Kibana & Sentry</div>
+                <div class="skill">UI/UX</div>
+                <div class="skill">HTML Design</div>
+                <div class="skill">Devtools</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================
+         POPUP ОКНО
+    ============================================ -->
+
+    <div class="popup" id="popup">
+
+        <div class="popup-content">
+
+            <!-- КРЕСТИК -->
+            <span class="close" onclick="closePopup()">&times;</span>
+
+            <h2>Обо мне</h2>
+
+            <p>
+                Этот popup создан на JavaScript.<br><br>
+
+                Что бы реализовать это окно, я изучил в этом проекте:
+                <br><br>
+
+                ✔ HTML структуру<br>
+                ✔ CSS стили<br>
+                ✔ Flexbox<br>
+                ✔ Адаптивность<br>
+                ✔ JavaScript функции<br>
+                ✔ Анимации<br>
+                ✔ Hover эффекты<br>
+                ✔ Popup окно
+            </p>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         ФУТЕР
+    ============================================ -->
+
+    <footer>
+        © 2026 | Создано для изучения HTML 🚀
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+    ============================================ -->
+
+    <script>
+
+        // ============================================
+        // ОТКРЫТЬ POPUP
+        // ============================================
+
+        function openPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        // ============================================
+        // ЗАКРЫТЬ POPUP
+        // ============================================
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // ============================================
+        // ЗАКРЫТИЕ ПО КЛИКУ ВНЕ ОКНА
+        // ============================================
+
+        window.onclick = function(event) {
+
+            let popup = document.getElementById('popup');
+
+            if (event.target == popup) {
+                popup.style.display = 'none';
+            }
+        }
+
+    </script>
+
+</body>
+</html>
